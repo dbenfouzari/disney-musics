@@ -13,6 +13,21 @@ export const libraryData = {
         image: "/images/circle-of-life.webp",
         video: "/videos/histoire-de-la-vie.mp4",
       },
+      "can-you-feel-the-love-tonight": {
+        title: "L'Amour brille sous les étoiles",
+        image: "/images/can-you-feel-the-love-tonight.webp",
+        video: "/videos/can-you-feel-the-love-tonight.mp4",
+      },
+      "be-prepared": {
+        title: "Soyez prêtes",
+        image: "/images/be-prepared.webp",
+        video: "/videos/be-prepared.mp4",
+      },
+      "je-voudrais-etre-roi": {
+        title: "Je voudrais déjà être roi",
+        image: "/images/je-voudrais-etre-roi.jpg",
+        video: "/videos/je-voudrais-etre-roi.mp4",
+      },
     },
   },
 };
