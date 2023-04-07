@@ -85,7 +85,7 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
       curr?.removeEventListener("play", onPlaying);
       curr?.removeEventListener("pause", onPause);
     };
-  }, [onDataLoaded, onTimeUpdate]);
+  }, [onDataLoaded, onPause, onPlaying, onTimeUpdate]);
 
   return [
     ref,

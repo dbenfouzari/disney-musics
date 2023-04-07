@@ -1,4 +1,4 @@
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { libraryData } from "@/data";

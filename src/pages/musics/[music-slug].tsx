@@ -106,7 +106,7 @@ export async function getStaticProps(
   };
 }
 
-export const getStaticPaths: GetStaticPaths = (context) => {
+export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: Object.values(libraryData).reduce((acc, data) => {
       Object.keys(data.musics).forEach((musicSlug) => {
