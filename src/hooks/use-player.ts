@@ -10,7 +10,6 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
     if (ref.current) {
       if (ref.current.paused) {
         await ref.current.play();
-        setIsPlaying(true);
       } else {
         ref.current.pause();
         setIsPlaying(false);
@@ -56,6 +55,14 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
     setDuration(target.duration);
   }, []);
 
+  const onPlaying = useCallback(() => {
+    setIsPlaying(true);
+  }, []);
+
+  const onPause = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
   useEffect(() => {
     if (ref.current) {
       ref.current.load();
@@ -68,11 +75,15 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
     if (curr) {
       curr.addEventListener("timeupdate", onTimeUpdate);
       curr.addEventListener("canplaythrough", onDataLoaded);
+      curr.addEventListener("play", onPlaying);
+      curr.addEventListener("pause", onPause);
     }
 
     return () => {
       curr?.removeEventListener("timeupdate", onTimeUpdate);
       curr?.removeEventListener("canplaythrough", onDataLoaded);
+      curr?.removeEventListener("play", onPlaying);
+      curr?.removeEventListener("pause", onPause);
     };
   }, [onDataLoaded, onTimeUpdate]);
 
