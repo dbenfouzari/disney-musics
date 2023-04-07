@@ -4,7 +4,7 @@ export function useControls() {
   const ref = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
 
-  const [controlsVisible, setControlsVisible] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(true);
 
   const onWrapperFocus = useCallback(function (event: Event) {
     const target = event.target as HTMLElement;
