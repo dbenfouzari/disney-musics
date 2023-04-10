@@ -22,3 +22,7 @@ export function unitsToString(units: ReturnType<typeof splitSecondsIntoUnits>) {
   if (units.hours) return [hoursStr, minutesStr, secondsStr].join(":");
   return [minutesStr, secondsStr].join(":");
 }
+
+export function secondsToDuration(seconds: number) {
+  return unitsToString(splitSecondsIntoUnits(seconds));
+}

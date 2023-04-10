@@ -10,18 +10,16 @@ import { useCallback } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import classes from "./movie.module.css";
 import { libraryData, Movies } from "@/data";
+import { aspectRatio } from "@/utils/aspect-ratio";
 import { cn } from "@/utils/cn";
 
 export type MovieScreenProps = InferGetStaticPropsType<typeof getStaticProps>;
-
-function toRatio(n: number, ratio = 16 / 9) {
-  return n / ratio;
-}
 
 export default function MovieScreen({
   title,
   musics,
   image,
+  slug,
 }: MovieScreenProps) {
   const router = useRouter();
 
@@ -51,13 +49,13 @@ export default function MovieScreen({
         <ul className={classes.music_list}>
           {Object.entries(musics).map(([key, obj]) => (
             <li key={key} className={classes.music_list_item}>
-              <Link href={`/musics/${key}`}>
+              <Link href={`/movies/${slug}/musics/${key}`}>
                 <Image
                   className={classes.music_list_item_image}
                   src={obj.image}
                   alt={obj.title}
                   width={250}
-                  height={toRatio(250, 16 / 10)}
+                  height={aspectRatio(250, 16 / 10)}
                 />
                 <p>{obj.title}</p>
               </Link>
@@ -80,7 +78,10 @@ export async function getStaticProps(
   const movieMusics = libraryData[movieSlug];
 
   return {
-    props: movieMusics,
+    props: {
+      slug: context.params["movie-slug"],
+      ...movieMusics,
+    },
   };
 }
 

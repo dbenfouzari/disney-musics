@@ -1,0 +1,15 @@
+.controls {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right {
+    display: flex;
+    gap: 1em;
+}
+
+.duration_span {
+    display: inline-flex;
+    align-items: center;
+}

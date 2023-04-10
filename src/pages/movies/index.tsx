@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import classes from "./movies.module.css";
 import { libraryData } from "@/data";
+import { aspectRatio } from "@/utils/aspect-ratio";
 import { cn } from "@/utils/cn";
 
 export type MusicListPageProps = InferGetStaticPropsType<typeof getStaticProps>;
@@ -29,8 +30,8 @@ export default function MusicListPage({ data }: MusicListPageProps) {
                 <Image
                   src={obj.image}
                   alt={obj.title}
-                  width={150}
-                  height={100}
+                  width={250}
+                  height={aspectRatio(250, 16 / 10)}
                 />
                 <p>{obj.title}</p>
               </Link>

@@ -40,8 +40,6 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
     [duration]
   );
 
-  const buttonContent = isPlaying ? "\u23f8" : "\u23F5";
-
   const onTimeUpdate = useCallback(function onTimeUpdate() {
     if (ref.current) {
       setCurrentTime(
@@ -87,6 +85,14 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
     };
   }, [onDataLoaded, onPause, onPlaying, onTimeUpdate]);
 
+  useEffect(() => {
+    (async () => {
+      if (ref.current) {
+        ref.current.muted = false;
+      }
+    })();
+  }, [ref]);
+
   return [
     ref,
     {
@@ -95,7 +101,6 @@ export function usePlayer<T extends HTMLVideoElement | HTMLAudioElement>() {
       isPlaying,
       onPlayPress,
       onStopPress,
-      buttonContent,
       onPeek,
     },
   ] as const;
