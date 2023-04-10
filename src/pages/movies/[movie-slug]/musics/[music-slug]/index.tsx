@@ -148,21 +148,21 @@ export async function getStaticProps(
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths: GetStaticPathsResult["paths"] = [];
-
-  Object.entries(libraryData).forEach(([movieKey, movieObj]) => {
-    Object.keys(movieObj.musics).forEach((musicKey) => {
-      paths.push({
-        params: {
-          "movie-slug": movieKey,
-          "music-slug": musicKey,
-        },
-      });
-    });
-  });
-
   return {
-    paths,
+    paths: Object.entries(libraryData).reduce<GetStaticPathsResult["paths"]>(
+      (acc, [movieKey, movieObj]) => {
+        Object.keys(movieObj.musics).forEach((musicKey) => {
+          acc.push({
+            params: {
+              "movie-slug": movieKey,
+              "music-slug": musicKey,
+            },
+          });
+        });
+        return acc;
+      },
+      []
+    ),
     fallback: false,
   };
 };
