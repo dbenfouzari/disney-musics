@@ -18,6 +18,14 @@ export default function Document() {
         <Meta name="msapplication-TileColor" content="#FFFFFF" />
         <Meta name="msapplication-tap-highlight" content="no" />
         <Meta name="theme-color" content="#FFFFFF" />
+        <Meta
+          name="viewport"
+          content="width=device-width; initial-scale=1; viewport-fit=cover"
+        />
+        <Meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
 
         <link rel="apple-touch-icon" href="/images/disney-icon.png" />
         <link rel="icon" href="/images/disney-icon.png" />
