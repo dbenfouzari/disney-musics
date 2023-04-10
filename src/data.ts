@@ -1,7 +1,7 @@
 export const libraryData = {
   "lion-king": {
     title: "Le Roi Lion",
-    image: "/images/lion-king.png",
+    image: "/images/lion-king.jpeg",
     musics: {
       "hakuna-matata": {
         title: "Hakuna Matata",

@@ -1,0 +1,67 @@
+.fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.page {
+    --header-height: 90px;
+
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.image_background {
+    z-index: -1;
+    filter: blur(8px);
+    object-fit: cover;
+    object-position: center;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    height: var(--header-height);
+    align-items: center;
+    padding: 24px;
+}
+
+.back_button {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 48px;
+    margin-right: 32px;
+    display: inline-flex;
+}
+
+.title {
+    font-size: 48px;
+}
+
+.content {
+    margin-top: var(--header-height);
+    padding: 24px;
+    height: calc(100vh - var(--header-height));
+    overflow: auto;
+}
+
+.content_title {
+    margin-bottom: 12px;
+}
+
+.music_list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.music_list_item {
+    max-width: 250px;
+    flex: 1 1 250px;
+}

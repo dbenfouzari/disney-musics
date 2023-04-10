@@ -5,17 +5,21 @@ import {
 } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { GetStaticPathsResult } from "next/types";
 import { useCallback, useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 import classes from "./music.module.css";
 import { libraryData, MusicKeys } from "@/data";
 import { useControls } from "@/hooks/use-controls";
 import { usePlayer } from "@/hooks/use-player";
+import { cn } from "@/utils/cn";
 import { splitSecondsIntoUnits, unitsToString } from "@/utils/duration-format";
 
 type MusicScreenProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Music({ video, image, title }: MusicScreenProps) {
+  const router = useRouter();
   const [videoHidden, setVideoHidden] = useState(true);
 
   const [
@@ -29,13 +33,29 @@ export default function Music({ video, image, title }: MusicScreenProps) {
     setVideoHidden((prev) => !prev);
   }, []);
 
+  const handleGoBack = useCallback(() => {
+    router.back();
+  }, [router]);
+
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
 
-      <div ref={containerRef} className={classes.container}>
+      <div ref={containerRef}>
+        <div
+          className={cn(
+            classes.header,
+            controlsVisible && classes.header_visible
+          )}
+        >
+          <button className={classes.back_button} onClick={handleGoBack}>
+            <FaArrowLeft />
+          </button>
+          <h1>{title}</h1>
+        </div>
+
         <video ref={videoRef} src={video} className={classes.video} />
         <Image
           src={image}

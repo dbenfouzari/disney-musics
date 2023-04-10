@@ -5,25 +5,66 @@ import {
 } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import classes from "./movie.module.css";
 import { libraryData, Movies } from "@/data";
+import { cn } from "@/utils/cn";
 
 export type MovieScreenProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function MovieScreen({ title, musics }: MovieScreenProps) {
-  return (
-    <div>
-      <h1>{title}</h1>
+function toRatio(n: number, ratio = 16 / 9) {
+  return n / ratio;
+}
 
-      <ul>
-        {Object.entries(musics).map(([key, obj]) => (
-          <li key={key}>
-            <Link href={`/musics/${key}`}>
-              <Image src={obj.image} alt={obj.title} width={150} height={100} />
-              <p>{obj.title}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+export default function MovieScreen({
+  title,
+  musics,
+  image,
+}: MovieScreenProps) {
+  const router = useRouter();
+
+  const handleGoBack = useCallback(() => {
+    router.back();
+  }, [router]);
+
+  return (
+    <div className={cn(classes.page, classes.fill)}>
+      <Image
+        src={image}
+        fill
+        alt={title}
+        className={classes.image_background}
+      />
+
+      <div className={classes.header}>
+        <button className={classes.back_button} onClick={handleGoBack}>
+          <FaArrowLeft />
+        </button>
+        <h1 className={classes.title}>{title}</h1>
+      </div>
+
+      <section className={classes.content}>
+        <h2 className={classes.content_title}>Musiques</h2>
+
+        <ul className={classes.music_list}>
+          {Object.entries(musics).map(([key, obj]) => (
+            <li key={key} className={classes.music_list_item}>
+              <Link href={`/musics/${key}`}>
+                <Image
+                  className={classes.music_list_item_image}
+                  src={obj.image}
+                  alt={obj.title}
+                  width={250}
+                  height={toRatio(250, 16 / 10)}
+                />
+                <p>{obj.title}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
