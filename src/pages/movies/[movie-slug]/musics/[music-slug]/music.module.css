@@ -35,11 +35,21 @@
     height: var(--header-height);
     display: flex;
     align-items: center;
-    padding: 2em;
+    padding:
+            calc(2em + env(safe-area-inset-top))
+            calc(2em + env(safe-area-inset-right))
+            calc(2em + env(safe-area-inset-bottom))
+            calc(2em + env(safe-area-inset-left));
     gap: 2em;
     position: fixed;
     left: 0;
     right: 0;
+}
+
+@media(orientation: landscape) {
+    .header {
+        padding-left: calc(2em + env(safe-area-inset-top));
+    }
 }
 
 .header_back_button {

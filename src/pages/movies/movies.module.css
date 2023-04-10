@@ -25,8 +25,9 @@
     height: var(--header-height);
     align-items: center;
     padding-top: calc(2em + env(safe-area-inset-top));
-    padding-bottom: 2em;
-    padding-inline: 2em;
+    padding-bottom: calc(2em + env(safe-area-inset-bottom));
+    padding-left: calc(2em + env(safe-area-inset-left));
+    padding-right: calc(2em + env(safe-area-inset-right));
 }
 
 .title {
