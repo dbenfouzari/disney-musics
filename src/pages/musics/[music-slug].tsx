@@ -8,10 +8,19 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { GetStaticPathsResult } from "next/types";
 import { useCallback, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaExpand,
+  FaImage,
+  FaPause,
+  FaPlay,
+  FaStop,
+  FaVideo,
+} from "react-icons/fa";
 import classes from "./music.module.css";
 import { libraryData, MusicKeys } from "@/data";
 import { useControls } from "@/hooks/use-controls";
+import { useFullscreenStatus } from "@/hooks/use-fullscreen-status";
 import { usePlayer } from "@/hooks/use-player";
 import { cn } from "@/utils/cn";
 import { splitSecondsIntoUnits, unitsToString } from "@/utils/duration-format";
@@ -24,10 +33,12 @@ export default function Music({ video, image, title }: MusicScreenProps) {
 
   const [
     videoRef,
-    { currentTime, duration, onPlayPress, onStopPress, buttonContent, onPeek },
+    { currentTime, duration, onPlayPress, onStopPress, isPlaying, onPeek },
   ] = usePlayer<HTMLVideoElement>();
 
   const [containerRef, { controlsVisible, controlsRef }] = useControls();
+
+  const [, setFullScreen] = useFullscreenStatus(videoRef);
 
   const handleToggleVideoPress = useCallback(() => {
     setVideoHidden((prev) => !prev);
@@ -36,6 +47,8 @@ export default function Music({ video, image, title }: MusicScreenProps) {
   const handleGoBack = useCallback(() => {
     router.back();
   }, [router]);
+
+  const playPauseContent = isPlaying ? <FaPause /> : <FaPlay />;
 
   return (
     <>
@@ -83,7 +96,7 @@ export default function Music({ video, image, title }: MusicScreenProps) {
             <span
               className={classes.timeline_current}
               style={{ width: (currentTime / duration) * 100 + "%" }}
-            ></span>
+            />
           </div>
 
           <div className={classes.controls_inner}>
@@ -92,14 +105,23 @@ export default function Music({ video, image, title }: MusicScreenProps) {
               {unitsToString(splitSecondsIntoUnits(duration))}
             </span>
 
-            <button className={classes.button} onClick={onStopPress}>
-              &#x23F9;
-            </button>
-            <button className={classes.button} onClick={onPlayPress}>
-              {buttonContent}
-            </button>
-            <button className={classes.button} onClick={handleToggleVideoPress}>
-              &#x1F3A5;
+            <div className={classes.buttons_wrapper}>
+              <button className={classes.button} onClick={onStopPress}>
+                <FaStop />
+              </button>
+              <button className={classes.button} onClick={onPlayPress}>
+                {playPauseContent}
+              </button>
+              <button
+                className={classes.button}
+                onClick={handleToggleVideoPress}
+              >
+                {videoHidden ? <FaVideo /> : <FaImage />}
+              </button>
+            </div>
+
+            <button className={classes.button} onClick={setFullScreen}>
+              <FaExpand />
             </button>
           </div>
         </div>

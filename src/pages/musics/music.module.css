@@ -2,6 +2,14 @@
     transform: translateY(0) !important;
 }
 
+.buttons_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 12px;
+}
+
 .button {
     border-radius: 50%;
     width: 80px;
@@ -9,9 +17,10 @@
     border: 0;
     background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
-    font-size: 48px;
-    text-align: center;
-    vertical-align: center;
+    font-size: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image, .video {
@@ -36,10 +45,10 @@
 
 .controls_inner {
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 24px;
-    padding: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 24px;
 }
 
 .timeline {
