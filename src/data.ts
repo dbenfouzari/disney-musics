@@ -1,4 +1,20 @@
-export const libraryData = {
+type Music = {
+  title: string;
+  image: string;
+  video: string;
+};
+
+type Musics = Record<string, Music>;
+
+type Movie = {
+  title: string;
+  image: string;
+  musics: Musics;
+};
+
+type Data = Record<string, Movie>;
+
+export const libraryData: Data = {
   "lion-king": {
     title: "Le Roi Lion",
     image: "/images/lion-king.jpeg",
