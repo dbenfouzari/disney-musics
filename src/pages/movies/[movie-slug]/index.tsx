@@ -3,6 +3,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,42 +29,48 @@ export default function MovieScreen({
   }, [router]);
 
   return (
-    <div className={cn(classes.page, classes.fill)}>
-      <Image
-        src={image}
-        fill
-        alt={title}
-        className={classes.image_background}
-      />
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
 
-      <div className={classes.header}>
-        <button className={classes.back_button} onClick={handleGoBack}>
-          <FaArrowLeft />
-        </button>
-        <h1 className={classes.title}>{title}</h1>
+      <div className={cn(classes.page, classes.fill)}>
+        <Image
+          src={image}
+          fill
+          alt={title}
+          className={classes.image_background}
+        />
+
+        <div className={classes.header}>
+          <button className={classes.back_button} onClick={handleGoBack}>
+            <FaArrowLeft />
+          </button>
+          <h1 className={classes.title}>{title}</h1>
+        </div>
+
+        <section className={classes.content}>
+          <h2 className={classes.content_title}>Musiques</h2>
+
+          <ul className={classes.music_list}>
+            {Object.entries(musics).map(([key, obj]) => (
+              <li key={key} className={classes.music_list_item}>
+                <Link href={`/movies/${slug}/musics/${key}`}>
+                  <Image
+                    className={classes.music_list_item_image}
+                    src={obj.image}
+                    alt={obj.title}
+                    width={250}
+                    height={aspectRatio(250, 16 / 10)}
+                  />
+                  <p>{obj.title}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
-
-      <section className={classes.content}>
-        <h2 className={classes.content_title}>Musiques</h2>
-
-        <ul className={classes.music_list}>
-          {Object.entries(musics).map(([key, obj]) => (
-            <li key={key} className={classes.music_list_item}>
-              <Link href={`/movies/${slug}/musics/${key}`}>
-                <Image
-                  className={classes.music_list_item_image}
-                  src={obj.image}
-                  alt={obj.title}
-                  width={250}
-                  height={aspectRatio(250, 16 / 10)}
-                />
-                <p>{obj.title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
+    </>
   );
 }
 
