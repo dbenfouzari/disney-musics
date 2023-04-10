@@ -56,7 +56,12 @@ export default function Music({ video, image, title }: MusicScreenProps) {
           <h1>{title}</h1>
         </div>
 
-        <video ref={videoRef} src={video} className={classes.video} />
+        <video
+          playsInline
+          ref={videoRef}
+          src={video}
+          className={classes.video}
+        />
         <Image
           src={image}
           alt="The Lion King"
