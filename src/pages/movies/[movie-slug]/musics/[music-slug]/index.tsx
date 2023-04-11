@@ -3,6 +3,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { GetStaticPathsResult } from "next/types";
@@ -97,55 +98,63 @@ export default function MovieMusicPage(
   }, [handleKeyDown]);
 
   return (
-    <div
-      tabIndex={0}
-      onClick={handleOverallPress}
-      className={cn(
-        classes.page,
-        !controlsVisible && classes.page__controls_hidden
-      )}
-    >
-      <nav ref={headerRef} className={cn(classes.header, classes.overlay)}>
-        <button className={classes.header_back_button} onClick={handleGoBack}>
-          <FaArrowLeft />
-        </button>
-
-        <h1 className={classes.title}>
+    <>
+      <Head>
+        <title>
           {props.movie.title} | {props.music.title}
-        </h1>
-      </nav>
+        </title>
+      </Head>
 
-      <video
-        ref={videoRef}
-        src={props.music.video}
-        playsInline
-        muted
-        autoPlay
-        className={classes.video}
-      />
+      <div
+        tabIndex={0}
+        onClick={handleOverallPress}
+        className={cn(
+          classes.page,
+          !controlsVisible && classes.page__controls_hidden
+        )}
+      >
+        <nav ref={headerRef} className={cn(classes.header, classes.overlay)}>
+          <button className={classes.header_back_button} onClick={handleGoBack}>
+            <FaArrowLeft />
+          </button>
 
-      <Image
-        src={props.music.image}
-        alt={fullTitle}
-        fill
-        className={cn(classes.image, videoVisible && classes.image__hidden)}
-        priority
-      />
+          <h1 className={classes.title}>
+            {props.movie.title} | {props.music.title}
+          </h1>
+        </nav>
 
-      <VideoControls
-        ref={controlsRef}
-        isPlaying={isPlaying}
-        className={cn(classes.overlay, classes.video_controls)}
-        videoHidden={!videoVisible}
-        onResumePress={onPlayPress}
-        onCameraTogglePress={toggleVideo}
-        onStopPress={onStopPress}
-        duration={duration}
-        currentTime={currentTime}
-        onPeek={onPeek}
-        onToggleFullscreenPress={toggleFullscreen}
-      />
-    </div>
+        <video
+          ref={videoRef}
+          src={props.music.video}
+          playsInline
+          muted
+          autoPlay
+          className={classes.video}
+        />
+
+        <Image
+          src={props.music.image}
+          alt={fullTitle}
+          fill
+          className={cn(classes.image, videoVisible && classes.image__hidden)}
+          priority
+        />
+
+        <VideoControls
+          ref={controlsRef}
+          isPlaying={isPlaying}
+          className={cn(classes.overlay, classes.video_controls)}
+          videoHidden={!videoVisible}
+          onResumePress={onPlayPress}
+          onCameraTogglePress={toggleVideo}
+          onStopPress={onStopPress}
+          duration={duration}
+          currentTime={currentTime}
+          onPeek={onPeek}
+          onToggleFullscreenPress={toggleFullscreen}
+        />
+      </div>
+    </>
   );
 }
 
