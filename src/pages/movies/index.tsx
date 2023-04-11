@@ -32,6 +32,7 @@ export default function MusicListPage({ data }: MusicListPageProps) {
                   alt={obj.title}
                   width={250}
                   height={aspectRatio(250, 16 / 10)}
+                  className={classes.movie_list_item_image}
                 />
                 <p>{obj.title}</p>
               </Link>

@@ -52,3 +52,8 @@
     max-width: 250px;
     flex: 1 1 250px;
 }
+
+.movie_list_item_image {
+    object-fit: cover;
+    object-position: center;
+}

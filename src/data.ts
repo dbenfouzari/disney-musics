@@ -82,6 +82,49 @@ export const libraryData: Data = {
       },
     },
   },
+  aladdin: {
+    title: "Aladdin",
+    image: "/images/aladdin.jpeg",
+    musics: {
+      "prince-ali": {
+        title: "Prince Ali",
+        image: "/images/prince-ali.jpeg",
+        video: "/videos/prince-ali.mp4",
+      },
+      "ce-reve-bleu": {
+        title: "Ce rêve bleu",
+        image: "/images/ce-reve-bleu.jpeg",
+        video: "/videos/ce-reve-bleu.mp4",
+      },
+      "ton-meilleur-ami": {
+        title: "Ton meilleur ami",
+        image: "/images/ton-meilleur-ami.jpeg",
+        video: "/videos/ton-meilleur-ami.mp4",
+      },
+    },
+  },
+  "livre-de-la-jungle": {
+    title: "Le Livre de la Jungle",
+    image: "/images/livre-de-la-jungle.webp",
+    musics: {
+      "bare-necessities": {
+        title: "Il en faut peu pour être heureux",
+        image: "/images/bare-necessities.jpeg",
+        video: "/videos/bare-necessities.mp4",
+      },
+    },
+  },
+  pocahontas: {
+    title: "Pocahontas",
+    image: "/images/pocahontas.webp",
+    musics: {
+      "air-vent": {
+        title: "L'air du vent",
+        image: "/images/air-vent.jpeg",
+        video: "/videos/air-vent.mp4",
+      },
+    },
+  },
 };
 
 export type LibraryData = typeof libraryData;
