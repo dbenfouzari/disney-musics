@@ -7,7 +7,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import classes from "./movie.module.css";
 import { libraryData, Movies } from "@/data";
@@ -27,6 +27,23 @@ export default function MovieScreen({
   const handleGoBack = useCallback(() => {
     router.back();
   }, [router]);
+
+  const handleKeyDown = useCallback(
+    async (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        return handleGoBack();
+      }
+    },
+    [handleGoBack]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   return (
     <>

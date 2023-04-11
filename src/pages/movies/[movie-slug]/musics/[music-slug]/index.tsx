@@ -6,13 +6,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { GetStaticPathsResult } from "next/types";
-import {
-  KeyboardEvent,
-  MouseEvent,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import classes from "./music.module.css";
 import { VideoControls } from "@/components/video-controls";
@@ -64,21 +58,48 @@ export default function MovieMusicPage(
   },
   []);
 
-  const handleKeyDown = useCallback(
-    async (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === " ") {
-        setControlsVisible(isPlaying);
-        await onPlayPress();
-      }
+  const handleSpacePress = useCallback(
+    function handleSpacePress(event: KeyboardEvent) {
+      if (event.target instanceof HTMLButtonElement) return;
+
+      setControlsVisible(isPlaying);
+      return onPlayPress();
     },
     [isPlaying, onPlayPress]
   );
+
+  const handleEscapePress = useCallback(
+    function handleEscapePress(_event: KeyboardEvent) {
+      return handleGoBack();
+    },
+    [handleGoBack]
+  );
+
+  const handleKeyDown = useCallback(
+    async (event: KeyboardEvent) => {
+      if (event.key === " ") {
+        return handleSpacePress(event);
+      }
+
+      if (event.key === "Escape") {
+        return handleEscapePress(event);
+      }
+    },
+    [handleEscapePress, handleSpacePress]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   return (
     <div
       tabIndex={0}
       onClick={handleOverallPress}
-      onKeyDown={handleKeyDown}
       className={cn(
         classes.page,
         !controlsVisible && classes.page__controls_hidden
