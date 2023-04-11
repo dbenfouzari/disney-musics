@@ -123,6 +123,11 @@ export const libraryData: Data = {
         image: "/images/air-vent.jpeg",
         video: "/videos/air-vent.mp4",
       },
+      "des-sauvages": {
+        title: "Des sauvages",
+        image: "/images/des-sauvages.jpeg",
+        video: "/videos/des-sauvages.mp4",
+      },
     },
   },
 };
